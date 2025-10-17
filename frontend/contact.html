@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+
+
+<!--the ham bar function -->
+<script>
+  function showNav() {
+    var element = document.getElementById("nav-items");
+    element.classList.toggle("show-items");
+  }
+  </script>
+</head>
+
+
+<body>
+        <header>
+<a href="index.html"><img class="logo" src="images/kehler-logo1.png" alt="kehler logo"></a>
+
+
+
+<nav >
+  <a class="toggle" onclick="showNav()"
+><i class="fa fa-bars" aria-hidden="true"></i
+></a>
+    <ul id="nav-items">
+        <li>
+            <a href="index.html">Home</a>
+        </li>
+        <li>
+            <a href="contact.html">Contact Us</a>
+        </li>
+        <li>
+            <a href="gallery.html">Gallery</a>
+        </li>
+       
+    </ul>
+</nav>
+
+    </header>
+    <main>
+        <section class="hero-section-contact">
+            <h1>Contact Us information</h1>
+
+            <h2>Activities</h2>
+            <ul>
+                <li>Pick fresh, seasonal fruits.</li>
+                <li>Feed the chickens and watch them cluck happily.</li>
+                <li>Spend time with the sheep and learn about farm life.</li>
+            </ul>
+            <h2>
+              <a href="https://www.google.com/maps/place/Kehler+Vegetable+Company/@49.8245135,-125.1279444,17z/data=!4m6!3m5!1s0x54881ba521f0dd49:0xb8c066fbd0190296!8m2!3d49.8245135!4d-125.1253641!16s%2Fg%2F11bxg5sk6y?entry=ttu&g_ep=EgoyMDI0MTExNy4wIKXMDSoASAFQAw%3D%3D" target="_blank">
+                  Address: #8083, Black Creek, BC V9J 1G9
+              </a>
+          </h2>
+          <h2>
+              <a href="tel:+12502023236">Phone: (250) 202-3236</a>
+          </h2>
+
+        </section>
+
+        <section class="contact-section">
+        
+                <h2>Plan Your Visit</h2>
+                <form>
+                    <label for="name">Name<span>    *required</span></label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    
+                    <label for="phone">Phone<span>    *required</span></label>
+                    <input type="tel" id="phone" name="phone" placeholder="Your Phone Number" required>
+                    
+                    <label for="email">Email<span>    *required</span></label>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    
+                    <label for="message">Message<span>    *required</span></label>
+                    <textarea id="message" name="message" placeholder="Your Message" rows="4"></textarea>
+                    
+                    <button onclick="validateForm()">Submit</button>
+                </form>
+        
+
+        </section>
+
+        <section class="map-section">
+          <div>
+            <iframe class="map-embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2573.935985696891!2d-125.12726002300114!3d49.82486833220888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54881ba521f0dd49%3A0xb8c066fbd0190296!2sKehler%20Vegetable%20Company!5e0!3m2!1sen!2sus!4v1731879794340!5m2!1sen!2sus" 
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <img src="images/farm-plowing.jpg" alt="farm plowing">
+          </div>
+        </section>
+
+    </main>
+    <footer>
+        <nav>
+          <div class="footer-container">
+            <img class="logo" src="images/kehler-logo1.png" alt="kehler logo" />
+            <ul>
+              
+              <li>
+                <a href="index.html">
+                  Home
+              </a>
+              </li>
+           
+
+             
+              <li>
+                <a href="contact.html">
+                Contact
+              </a>
+              </li>
+            
+            
+              <li>
+                <a href="gallery.html">
+               Gallery
+              </a>
+              </li> 
+           
+            </ul>
+           
+           <ul class="end-footer">
+            <li>
+                follow along with the farm and to see whats growing find us on facebook and instagram.
+                
+                <div><a href="https://www.instagram.com/kehlervegetables" target="_blank"><img src="images/instagram.png" alt="instagram logo">@kehlervegetables</a></div>
+            </li>
+           </ul>
+          </div>
+        </nav>
+        <div class="divider">
+          <h4>©2024 - <span>This is fictional website for a college project</span> | All right reserved</h4>
+        </div>
+      </footer>
+      <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gallery</title>
+        <link rel="stylesheet" href="style.css">
+        <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!--the ham bar function -->
+    <script>
+      function showNav() {
+        var element = document.getElementById("nav-items");
+        element.classList.toggle("show-items");
+      }
+      </script>
+    </head>
+<body>
+    <header>
+        <a href="index.html"><img class="logo" src="images/kehler-logo1.png" alt="kehler logo"></a>
+        
+        
+        
+        <nav >
+          <a class="toggle" onclick="showNav()"
+        ><i class="fa fa-bars" aria-hidden="true"></i
+        ></a>
+            <ul id="nav-items">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="contact.html">Contact Us</a>
+                </li>
+                <li>
+                    <a href="gallery.html">Gallery</a>
+                </li>
+               
+            </ul>
+        </nav>
+        
+            </header>
+    <main>
+        <section class="hero-section">
+            <h1>Here are some images of the farm</h1>
+        </section>
+<!-- Gallery Grid -->
+<div class="gallery-grid">
+    <img src="images\gallery\IMG_20160320_121814_d600.jpg" alt="chikens!">
+    <img src="images\gallery\IMG_20160324_132604_d600.jpg" alt="eggs">
+    <img src="images\gallery\IMG_20160331_210227_d600.jpg" alt="plowing">
+    <img src="images\gallery\IMG_20160402_201551_d600.jpg" alt="tractor">
+    <img src="images\gallery\IMG_20160923_184504_d600.jpg" alt="pumpkin harvest">
+    <img src="images\gallery\IMG_20160430_194715_d600.jpg" alt="farm field">
+    <img src="images\gallery\IMG_20160509_202850_d600.jpg" alt="our green house">
+    <img src="images\gallery\IMG_20180708_213323_715_d600.jpg" alt="green">
+    <img src="images\gallery\IMG_20180908_194303_797_d600.jpg" alt="pumpkin cute photo">
+    <img src="images\gallery\IMG_20180901_155511_334_d600.jpg" alt="onions">
+    <img src="images\gallery\IMG_20180402_172513_294_d600.jpg" alt="eggs">
+    <img src="images\gallery\IMG_20161019_102053_d600.jpg" alt="Pumpkin produce">
+    <img src="images\gallery\IMG_20161010_141850_d600.jpg" alt="celery">
+   
+
+  </div>
+  
+  <!-- Modal for Focused View -->
+  <div class="modal" id="imageModal">
+    <button class="nav-button left" id="prevButton">❮</button>
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="">
+      <div class="caption" id="modalCaption"></div>
+    </div>
+    <button class="nav-button right" id="nextButton">❯</button>
+  </div>
+    </main>
+
+    <footer>
+        <nav>
+          <div class="footer-container">
+            <img class="logo" src="images/kehler-logo1.png" alt="kehler logo" />
+            <ul>
+              
+              <li>
+                <a href="index.html">
+                  Home
+              </a>
+              </li>
+           
+
+             
+              <li>
+                <a href="contact.html">
+                Contact
+              </a>
+              </li>
+            
+            
+              <li>
+                <a href="gallery.html">
+               Gallery
+              </a>
+              </li> 
+           
+            </ul>
+           
+           <ul class="end-footer">
+            <li>
+                follow along with the farm and to see whats growing find us on facebook and instagram.
+                
+                <div><a href="https://www.instagram.com/kehlervegetables" target="_blank"><img src="images/instagram.png" alt="instagram logo">@kehlervegetables</a></div>
+            </li>
+           </ul>
+          </div>
+        </nav>
+        <div class="divider">
+          <h4>©2024 - <span>This is fictional website for a college project</span> | All right reserved</h4>
+        </div>
+      </footer>
+      <script src="main.js"></script>
+</body>
+
+</html>
