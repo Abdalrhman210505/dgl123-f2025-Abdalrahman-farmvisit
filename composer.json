@@ -1,0 +1,21 @@
+{
+    "name": "farmvisit/milestone3",
+    "description": "Farm Visit & Produce Showcase backend implementation",
+    "type": "project",
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "FarmVisit\\": "backend/lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FarmVisit\\Tests\\": "tests/"
+        }
+    }
+}

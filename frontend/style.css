@@ -549,3 +549,128 @@ background-size: cover;
     right: 20px;
   }
        
+/* Backend utility styles */
+.auth-container {
+    max-width: 400px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.auth-container input {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.auth-container button {
+    background: #2f855a;
+    color: #fff;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.alert {
+    margin: 1rem 0;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+}
+.alert.success {
+    background: #c6f6d5;
+    color: #2f855a;
+}
+.alert.error {
+    background: #fed7d7;
+    color: #c53030;
+}
+.admin-header {
+    background: #3c6e71;
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.admin-header nav a {
+    color: #fff;
+    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: 600;
+}
+.dashboard {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    padding: 2rem;
+}
+.card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+.admin-table {
+    padding: 2rem;
+}
+.admin-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+.admin-table th,
+.admin-table td {
+    border: 1px solid #e2e8f0;
+    padding: 0.75rem;
+    text-align: left;
+}
+.inline-form {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-right: 0.5rem;
+}
+.inline-form button {
+    padding: 0.4rem 0.8rem;
+}
+.inline-form .danger,
+button.danger {
+    background: #c53030;
+    color: #fff;
+}
+.filter-form {
+    margin-bottom: 1rem;
+}
+.gallery-admin,
+.hours-admin {
+    padding: 2rem;
+}
+.gallery-admin table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.gallery-admin th,
+.gallery-admin td {
+    border: 1px solid #e2e8f0;
+    padding: 0.75rem;
+}
+.hours-admin table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.hours-admin th,
+.hours-admin td {
+    border: 1px solid #e2e8f0;
+    padding: 0.75rem;
+}
+@media (max-width: 600px) {
+    .inline-form {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

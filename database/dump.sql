@@ -1,0 +1,3 @@
+-- Generate this file by running:
+-- mysqldump -u YOUR_USER -p farm_visit_showcase > database/dump.sql
+-- Include the resulting dump when submitting Milestone 3.
