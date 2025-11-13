@@ -92,14 +92,6 @@ CREATE TABLE produce_categories (
   FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE
 );
 
--- =========================
--- Optional: newsletter subscriptions
--- =========================
-CREATE TABLE newsletter_subs (
-  sub_id INT AUTO_INCREMENT PRIMARY KEY,
-  email VARCHAR(255) NOT NULL UNIQUE,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
 -- =========================
 -- Sample Data for farm_hours
