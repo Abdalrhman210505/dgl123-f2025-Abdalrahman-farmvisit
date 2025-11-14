@@ -26,3 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") { // checks if the user clicked on th
     }
 }
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+</head>
+<body>
+</body>
+</html>
