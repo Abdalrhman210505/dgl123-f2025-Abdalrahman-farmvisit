@@ -8,8 +8,8 @@ require_once("../config/db.php");
 
 
 //getting all the images
-$stmt = $pdo -> query("SELECT * FROM gallery_images ORDER BY uploaded_at DESC")
-$images = $stmt -> fetchAll(PDO:: FETCH_ASSOC)
+$stmt = $pdo -> query("SELECT * FROM gallery_images ORDER BY uploaded_at DESC");
+$images = $stmt -> fetchAll(PDO:: FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -17,9 +17,38 @@ $images = $stmt -> fetchAll(PDO:: FETCH_ASSOC)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Manage Gallery</title>
 </head>
 <body>
+    <main>
+<h1>Manage Gallery!</h1>
+<p>
+    <a href="upload_gallery.php"> + Upload New Image</a>
+</p>
+
+<table>
+    <tr>
+        <th>Image</th>
+        <th>Caption</th>
+        <th>Uploaded At</th>
+    </tr>
+
+    <?php foreach ($images as $img): ?>
+    <tr>
+        <td>
+            <img src="../uploads/<?= htmlspecialchars($img['file_name']) ?>" width="120">
+        </td>
+        <td><?= htmlspecialchars($img['caption']) ?></td>
+        <td><?= $img['uploaded_at'] ?></td>
+    </tr>
+    <?php endforeach; ?>
+</table>
+
+<p><a href="dashboard.php"> <- Back to Dashboard</a></p>
+
+
+
+    </main>
     
 </body>
 </html>
