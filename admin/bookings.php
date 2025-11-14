@@ -7,7 +7,7 @@ if (!isset($_SESSION["user_id"])) {
 require_once("../config/db.php");
 
 
-$stmt = $pdo->query(SELECT * FROM bookings ORDER BY created_at DESC);
+$stmt = $pdo->query("SELECT * FROM bookings ORDER BY created_at DESC");
 $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -35,7 +35,7 @@ $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <th>Status</th>
         <th>Actions</th>
     </tr>
-<?php foreach $bookings as $b ?>
+<?php foreach ($bookings as $b): ?>
  <tr>
         <td><?= $b["booking_id"] ?></td>
         <td><?= htmlspecialchars($b["visitor_name"]) ?></td> <!-- I have used special chars method to protect the page from xos attacks-->
