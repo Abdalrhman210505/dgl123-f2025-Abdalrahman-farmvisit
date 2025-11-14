@@ -32,5 +32,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") { // checks if the user clicked on th
     <title>Admin Login</title>
 </head>
 <body>
+
+<h2>Admin Login</h2>
+
+<?php if ($error): ?>
+<p style="color:red;"><?= $error ?></p>  <!-- if there is an error the error text color will be red -->
+<?php endif; ?>
+
+<form method="POST"> <!--  this firm is the login the user has to submit-->
+    <label>Username</label><br>
+    <input type="text" name="username" required><br><br>
+
+    <label>Password</label><br>
+    <input type="password" name="password" required><br><br>
+
+    <button type="submit">Login</button>
+</form>
+
 </body>
 </html>
