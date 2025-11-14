@@ -5,4 +5,10 @@ if (!isset($_SESSION["user_id"])) {
     exit;
 }
 require_once("../config/db.php");
+
+// fethcing farm hours
+$stmt = $pdo -> query("SELECT * FROM farm_hours ORDER BY day_of_week ASC");
+$hours = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+// label
+$days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 ?>
