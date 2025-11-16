@@ -1,8 +1,8 @@
 <?php
 session_start();
-if (!isset($_SESSION["user_id"])) {
-    header("Location: login.php");
-    exit;
-}
-require_once("../config/db.php");
+session_unset();       
+session_destroy();      
+
+header("Location: login.php");   //take user to login page
+exit;                  
 ?>
