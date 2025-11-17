@@ -29,6 +29,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($stmt -> rowCount() > 0) {
             $message = "Username already taken.";
         } else {
+
+            // Hash password
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+            // Insert user
+            $stmt = $pdo -> prepare("
+                INSERT INTO users (username, password_hash, email, full_name, role)
+                VALUES (?, ?, ?, ?, 'staff')
+            ");
+            $stmt -> execute([$username, $passwordHash, $email, $fullName]);
+
+            $message = "Registration successful! You may now log in.";
+            header("Location: login.php");
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
