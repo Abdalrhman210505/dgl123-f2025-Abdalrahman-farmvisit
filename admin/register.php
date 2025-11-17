@@ -55,6 +55,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
     <main>
+<?php if ($message): ?>
+    <p style="color: red;"><?= $message ?></p>
+<?php endif; ?>
+
+<form method="POST">
+
+    <label>Username:</label><br>
+    <input type="text" name="username" required><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <label>Full Name:</label><br>
+    <input type="text" name="full_name"><br><br>
+
+    <label>Password:</label><br>
+    <input type="password" name="password" required><br><br>
+
+    <label>Confirm Password:</label><br>
+    <input type="password" name="confirm_password" required><br><br>
+
+    <button type="submit">Register</button>
+
+</form>
+
+<p><a href="login.php"><- Back to Login</a></p>
+
     </main>
 </body>
 </html>
