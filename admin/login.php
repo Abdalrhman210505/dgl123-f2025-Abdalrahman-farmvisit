@@ -47,6 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") { // checks if the user clicked on th
     <input type="password" name="password" required><br><br>
 
     <button type="submit">Login</button>
+    <br><br>
+<a href="register.php" style="display:inline-block; padding:8px 12px; background:#eee; border:1px solid #ccc; text-decoration:none;">
+    Create New Account
+</a>
 </form>
 
 </body>
