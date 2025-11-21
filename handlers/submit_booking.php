@@ -42,3 +42,7 @@ try {
     $stmt->execute([$visitorName, $email, $phone, $message]);
 
     echo json_encode(['success' => true, 'message' => 'Your visit request has been received.']);
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => 'Could not save your request at this time.']);
+}
