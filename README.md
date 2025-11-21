@@ -162,3 +162,71 @@ Before logging in, create an account:
 http://localhost/dgl123-f2025-Abdalrahman-farmvisit/admin/register.php
 
 This creates your staff user.
+✨ Features Implemented
+🔐 User Authentication
+
+Staff registration
+
+Login & logout
+
+Password hashing using password_hash()
+
+Admin-only access using sessions
+
+🖼️ Gallery Management (CRUD)
+
+Upload new images
+
+Edit captions
+
+Delete images
+
+Display gallery on frontend
+
+🕒 Farm Hours Management
+
+Update farm hours stored in MySQL
+
+Display changes on the public site
+
+📩 Booking System
+
+Frontend form submits via JS (AJAX)
+
+handlers/submit_booking.php validates + stores request
+
+Admin can update booking status (new → confirmed/cancelled)
+
+🎨 Frontend Design
+
+Responsive layout
+
+Hover effects
+
+Image modal viewer
+
+Smooth scrolling
+
+📌 Future Enhancements
+
+(Optional for Milestone 3 but good for full project polish.)
+
+Add CRUD for produce/categories
+
+Add email confirmation for bookings
+
+Improve admin dashboard UI
+
+Add admin roles (manager, staff)
+
+Add pagination to gallery
+
+🤖 AI Assistance Acknowledgement
+
+Portions of this project—including code refactoring, debugging guidance, and parts of this README—were created with the help of AI tools (ChatGPT).
+All final implementations were tested, reviewed, and modified manually to meet the course requirements.
+
+✔ Project Ready for Submission
+
+GitHub Repository:
+https://github.com/Abdalrhman210505/dgl123-f2025-Abdalrahman-farmvisit
