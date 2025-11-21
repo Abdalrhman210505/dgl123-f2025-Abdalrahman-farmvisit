@@ -4,5 +4,21 @@ if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
     exit;
 }
+
 require_once("../config/db.php");
-?>
+
+// Get booking id + status
+$id = $_GET["id"] ?? null;
+$status = $_GET["status"] ?? null;
+
+if (!$id || !$status) {
+    header("Location: bookings.php");
+    exit;
+}
+
+// Update booking
+$stmt = $pdo->prepare("UPDATE bookings SET status = ? WHERE booking_id = ?");
+$stmt->execute([$status, $id]);
+
+header("Location: bookings.php");
+exit;
