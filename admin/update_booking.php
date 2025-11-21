@@ -8,10 +8,12 @@ if (!isset($_SESSION["user_id"])) {
 require_once("../config/db.php");
 
 // Get booking id + status
-$id = $_GET["id"] ?? null;
+$id = isset($_GET["id"]) ? (int) $_GET["id"] : null;
 $status = $_GET["status"] ?? null;
 
-if (!$id || !$status) {
+$allowedStatuses = ["new", "confirmed", "cancelled"];
+
+if (!$id || !$status || !in_array($status, $allowedStatuses, true)) {
     header("Location: bookings.php");
     exit;
 }
