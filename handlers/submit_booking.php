@@ -35,3 +35,10 @@ if ($errors) {
     exit;
 }
 
+try {
+    $stmt = $pdo->prepare(
+        'INSERT INTO bookings (visitor_name, email, phone, notes, status) VALUES (?, ?, ?, ?, "new")'
+    );
+    $stmt->execute([$visitorName, $email, $phone, $message]);
+
+    echo json_encode(['success' => true, 'message' => 'Your visit request has been received.']);
