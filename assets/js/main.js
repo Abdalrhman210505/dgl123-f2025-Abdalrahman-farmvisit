@@ -1,31 +1,28 @@
 "use strict";
 
-if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
-  window.onload = function () {
-    alert("Welcome to our website!");
-  };
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const isHome = window.location.pathname.endsWith("index.html") || window.location.pathname === "/";
+  if (isHome) {
+    window.onload = function () {
+      alert("Welcome to our website!");
+    };
+  }
 
-document.addEventListener("DOMContentLoaded", function () {
-  // Smooth Scroll for navigation links
-  const navLinks = document.querySelectorAll("nav ul li a");
+  const navLinks = document.querySelectorAll("nav ul li a[href^='#']");
   navLinks.forEach(link => {
-    link.addEventListener("click", function (event) {
-      if (this.getAttribute("href").startsWith("#")) {
+    link.addEventListener("click", event => {
+      const targetId = link.getAttribute("href").substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
         event.preventDefault();
-        const targetId = this.getAttribute("href").substring(1);
-        const targetElement = document.getElementById(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 50,
-            behavior: "smooth"
-          });
-        }
+        window.scrollTo({
+          top: targetElement.offsetTop - 50,
+          behavior: "smooth"
+        });
       }
     });
   });
 
-  // Image hover effect
   const images = document.querySelectorAll("img");
   images.forEach(img => {
     img.addEventListener("mouseover", function () {
@@ -37,117 +34,117 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Back to top button
   const backToTop = document.createElement("button");
   backToTop.textContent = "↑";
   backToTop.id = "backToTop";
+  backToTop.type = "button";
   document.body.appendChild(backToTop);
 
-  backToTop.style.position = "fixed";
-  backToTop.style.bottom = "20px";
-  backToTop.style.right = "20px";
-  backToTop.style.padding = "10px 15px";
-  backToTop.style.fontSize = "20px";
-  backToTop.style.display = "none";
-  backToTop.style.cursor = "pointer";
-
-  window.addEventListener("scroll", function () {
-    if (window.scrollY > 200) {
-      backToTop.style.display = "block";
-    } else {
-      backToTop.style.display = "none";
-    }
+  Object.assign(backToTop.style, {
+    position: "fixed",
+    bottom: "20px",
+    right: "20px",
+    padding: "10px 15px",
+    fontSize: "20px",
+    display: "none",
+    cursor: "pointer"
   });
 
-  backToTop.addEventListener("click", function () {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+  window.addEventListener("scroll", () => {
+    backToTop.style.display = window.scrollY > 200 ? "block" : "none";
   });
-});
 
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
-    // JavaScript for Interactive Gallery
-    const images = document.querySelectorAll('.gallery-grid img');
-    const modal = document.getElementById('imageModal');
-    const modalImage = document.getElementById('modalImage');
-    const modalCaption = document.getElementById('modalCaption');
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
-  
-    let currentIndex = 0;
-  
-    // Open modal when an image is clicked (I took all this code from the internet )
-    images.forEach((img, index) => {
-      img.addEventListener('click', () => {
-        modal.classList.add('active');
+  const galleryImages = document.querySelectorAll(".gallery-grid img");
+  const modal = document.getElementById("imageModal");
+  const modalImage = document.getElementById("modalImage");
+  const modalCaption = document.getElementById("modalCaption");
+  const prevButton = document.getElementById("prevButton");
+  const nextButton = document.getElementById("nextButton");
+  let currentIndex = 0;
+
+  if (galleryImages.length && modal && modalImage && modalCaption && prevButton && nextButton) {
+    galleryImages.forEach((img, index) => {
+      img.addEventListener("click", () => {
+        modal.classList.add("active");
         currentIndex = index;
         updateModal();
       });
     });
-  
-    // Close modal when clicking outside the image
-    modal.addEventListener('click', (e) => {
+
+    modal.addEventListener("click", e => {
       if (e.target === modal) {
-        modal.classList.remove('active');
+        modal.classList.remove("active");
       }
     });
-  
-    // Update modal content
-    function updateModal() {
-      const currentImage = images[currentIndex];
+
+    const updateModal = () => {
+      const currentImage = galleryImages[currentIndex];
       modalImage.src = currentImage.src;
       modalCaption.textContent = currentImage.alt;
-    }
-  
-    // Navigate to previous image
-    prevButton.addEventListener('click', () => {
-      currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+    };
+
+    prevButton.addEventListener("click", () => {
+      currentIndex = currentIndex > 0 ? currentIndex - 1 : galleryImages.length - 1;
       updateModal();
     });
-  
-    // Navigate to next image
-    nextButton.addEventListener('click', () => {
-      currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+
+    nextButton.addEventListener("click", () => {
+      currentIndex = currentIndex < galleryImages.length - 1 ? currentIndex + 1 : 0;
       updateModal();
     });
-  
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (modal.classList.contains('active')) {
-        if (e.key === 'ArrowLeft') {
-          prevButton.click();
-        } else if (e.key === 'ArrowRight') {
-          nextButton.click();
-        } else if (e.key === 'Escape') {
-          modal.classList.remove('active');
-        }
+
+    document.addEventListener("keydown", e => {
+      if (modal.classList.contains("active")) {
+        if (e.key === "ArrowLeft") prevButton.click();
+        else if (e.key === "ArrowRight") nextButton.click();
+        else if (e.key === "Escape") modal.classList.remove("active");
       }
     });
+  }
 
+  const bookingForm = document.getElementById("bookingForm");
+  const bookingFeedback = document.getElementById("bookingFeedback");
 
+  if (bookingForm && bookingFeedback) {
+    const setFeedback = (message, isError = false) => {
+      bookingFeedback.textContent = message;
+      bookingFeedback.classList.remove("visually-hidden", "feedback--error", "feedback--success");
+      bookingFeedback.classList.add(isError ? "feedback--error" : "feedback--success");
+    };
 
-    //contact webpage
+    bookingForm.addEventListener("submit", async event => {
+      event.preventDefault();
+      const formData = new FormData(bookingForm);
+      const name = formData.get("name").trim();
+      const phone = formData.get("phone").trim();
+      const email = formData.get("email").trim();
+      const message = formData.get("message").trim();
 
-    /*  script for ensuring that all the fields are filled before pressing submit */
-    function validateForm() {
-        // Get form fields
-        const name = document.getElementById("name").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const message = document.getElementById("message").value.trim();
-  
-        // Check if any field is empty
-        if (!name || !phone || !email || !message) {
-            alert("Please fill in all fields.");
-            return;
-        }
-  
-        // If all fields are filled
-        else{ alert("Thank you for your submission!");}
-        
-        // Optionally, submit the form programmatically
-        // document.getElementById("contactForm").submit();
+      if (!name || !phone || !email || !message) {
+        setFeedback("Please fill in all required fields.", true);
+        return;
       }
-  
+
+      try {
+        const response = await fetch(bookingForm.action, {
+          method: "POST",
+          body: formData
+        });
+        const result = await response.json();
+
+        if (result.success) {
+          setFeedback(result.message);
+          bookingForm.reset();
+        } else {
+          setFeedback(result.message || "Something went wrong.", true);
+        }
+      } catch (error) {
+        setFeedback("Unable to submit your request right now.", true);
+      }
+    });
+  }
+});
