@@ -105,3 +105,66 @@ VALUES
 (4, '09:00:00', '17:00:00', 'Open to visits', 0),
 (5, '09:00:00', '18:00:00', 'Farmers market on-site', 0),
 (6, '10:00:00', '16:00:00', 'Weekend visits', 0);
+
+
+/* =========================
+   SAMPLE DATA DUMP
+   Matching Milestone 2 schema
+========================= */
+
+-- Seed admin user (password = admin123)
+INSERT INTO users (username, password_hash, email, full_name, role)
+VALUES (
+  'admin',
+  '$2y$10$BYNaOuB6ePR6bw/KllCwGehpG1WX5h9MM/JxJ42rK00uCeykXVFUm',
+  'admin@example.com',
+  'Main Administrator',
+  'admin'
+);
+
+-- Sample staff user
+INSERT INTO users (username, password_hash, email, full_name, role)
+VALUES (
+  'staff1',
+  '$2y$10$BYNaOuB6ePR6bw/KllCwGehpG1WX5h9MM/JxJ42rK00uCeykXVFUm',
+  'staff@example.com',
+  'Farm Staff',
+  'staff'
+);
+
+-- Seed bookings
+INSERT INTO bookings (visitor_name, email, phone, visit_date, visit_time, party_size, notes, status)
+VALUES
+('John Smith', 'john@example.com', '250-555-2891', '2025-03-21', '10:00:00', 3, 'Excited to visit the farm.', 'new'),
+('Sarah Lee', 'sarah@example.com', '778-421-5532', '2025-03-23', '14:30:00', 2, 'Asking about strawberries.', 'confirmed');
+
+-- Gallery images
+INSERT INTO gallery_images (file_name, caption, uploaded_by)
+VALUES
+('farm-view.jpg', 'Sunny day at the farm', 1),
+('vegetables.jpg', 'Fresh vegetables harvested', 1);
+
+
+-- Produce seed data
+INSERT INTO produce (name, description, price, in_stock, image_id, featured)
+VALUES
+('Strawberries', 'Fresh local strawberries.', 5.99, 40, 1, 1),
+('Potatoes', 'Red potatoes grown on-site.', 3.49, 120, 2, 0),
+('Carrots', 'Crisp and sweet organic carrots.', 2.99, 65, NULL, 0);
+
+-- Categories
+INSERT INTO categories (name)
+VALUES
+('Vegetables'),
+('Fruits'),
+('Organic'),
+('Seasonal');
+
+-- Produce-Category many-to-many links
+INSERT INTO produce_categories (produce_id, category_id)
+VALUES
+(1, 2), -- Strawberries → Fruits
+(1, 4), -- Strawberries → Seasonal
+(2, 1), -- Potatoes → Vegetables
+(3, 1), -- Carrots → Vegetables
+(3, 3); -- Carrots → Organic
