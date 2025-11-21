@@ -30,8 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") { // checks if the user clicked on th
 <html>
 <head>
     <title>Admin Login</title>
+   <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
 <body>
+    <main>
 
 <h2>Admin Login</h2>
 
@@ -52,6 +54,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") { // checks if the user clicked on th
     Create New Account
 </a>
 </form>
-
+</main>
 </body>
 </html>

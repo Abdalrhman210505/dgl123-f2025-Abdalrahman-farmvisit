@@ -18,6 +18,7 @@ $images = $stmt -> fetchAll(PDO:: FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Gallery</title>
+    <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
 <body>
     <main>
@@ -31,6 +32,7 @@ $images = $stmt -> fetchAll(PDO:: FETCH_ASSOC);
         <th>Image</th>
         <th>Caption</th>
         <th>Uploaded At</th>
+        <th>Actions</th> <!-- NEW -->
     </tr>
 
     <?php foreach ($images as $img): ?>
@@ -38,15 +40,24 @@ $images = $stmt -> fetchAll(PDO:: FETCH_ASSOC);
         <td>
             <img src="../uploads/<?= htmlspecialchars($img['file_name']) ?>" width="120">
         </td>
+
         <td><?= htmlspecialchars($img['caption']) ?></td>
+
         <td><?= $img['uploaded_at'] ?></td>
+
+        <td>
+            <a href="update_gallery.php?id=<?= $img['image_id'] ?>">Edit</a>
+            |
+            <a href="delete_gallery.php?id=<?= $img['image_id'] ?>"
+               onclick="return confirm('Are you sure you want to delete this image?');">
+               Delete
+            </a>
+        </td>
     </tr>
     <?php endforeach; ?>
 </table>
 
 <p><a href="dashboard.php"> <- Back to Dashboard</a></p>
-
-
 
     </main>
     

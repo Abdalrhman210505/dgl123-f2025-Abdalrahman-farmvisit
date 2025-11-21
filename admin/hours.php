@@ -19,13 +19,14 @@ $days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satu
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farm Hours</title>
+  <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
 <body>
    <main>
 <h1>Manage Farm Hours</h1>
 
-<form method="POST" action="save_hours.php">
-<table>
+<form class="form hours-page-form" method="POST" action="save_hours.php">
+<table class="hours-table">
     <tr>
         <th>Day</th>
         <th>Open Time</th>

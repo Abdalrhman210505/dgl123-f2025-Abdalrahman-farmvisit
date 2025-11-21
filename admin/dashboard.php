@@ -9,8 +9,10 @@ if (!isset($_SESSION["user_id"])) {
 <html>
 <head>
     <title>Admin Dashboard</title>
+     <link rel="stylesheet" href="../assets/css/admin.css">
 </head>
 <body>
+    <main>
 
 <h1>Welcome, <?= $_SESSION["username"] ?></h1>
 
@@ -20,6 +22,6 @@ if (!isset($_SESSION["user_id"])) {
     <li><a href="hours.php">Manage Farm Hours</a></li>
     <li><a href="logout.php">Logout</a></li>
 </ul>
-
+</main>
 </body>
 </html>
