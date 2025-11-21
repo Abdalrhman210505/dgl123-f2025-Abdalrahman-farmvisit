@@ -1,0 +1,204 @@
+/* ======================================
+   ACTION BUTTONS (Edit, Delete, Confirm)
+====================================== */
+
+.table-actions a {
+    margin-right: 0.5rem;
+    font-weight: 600;
+}
+
+.action-edit {
+    color: var(--admin-accent);
+}
+
+.action-edit:hover {
+    text-decoration: underline;
+}
+
+.action-delete {
+    color: var(--admin-danger);
+}
+
+.action-delete:hover {
+    text-decoration: underline;
+}
+
+
+
+/* ======================================
+   DASHBOARD CARDS
+====================================== */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.dashboard-card {
+    padding: 1.25rem;
+    background: var(--admin-surface);
+    border-radius: 0.75rem;
+    border: 1px solid var(--admin-border);
+    box-shadow: 0 6px 12px rgba(15,23,42,0.06);
+    text-decoration: none;
+    color: var(--admin-text-main);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(15,23,42,0.11);
+}
+
+.dashboard-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.dashboard-card p {
+    margin: 0.5rem 0 0;
+    color: var(--admin-text-muted);
+    font-size: 0.9rem;
+}
+
+/* ======================================
+   LOGIN / REGISTER PAGE
+====================================== */
+
+.auth-wrapper {
+    max-width: 500px;
+    margin: 4rem auto;
+    background: var(--admin-surface);
+    padding: 2rem 2rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--admin-border);
+    box-shadow: 0 8px 18px rgba(15,23,42,0.08);
+}
+
+.auth-wrapper h2 {
+    text-align: center;
+}
+
+.auth-wrapper form {
+    margin-top: 1.5rem;
+}
+
+.auth-wrapper p {
+    text-align: center;
+}
+
+/* ======================================
+   HOURS PAGE TABLE (FIXED VERSION)
+====================================== */
+
+/* Make form full width ONLY on Hours page */
+.hours-page-form {
+    max-width: 100% !important;
+}
+
+/* Table expands naturally */
+.hours-table {
+    width: 100%;
+    table-layout: auto;
+}
+
+/* Time inputs */
+.hours-table input[type="time"],
+.hours-table input[type="number"] {
+    max-width: 120px;
+}
+
+/* Notes input expands fully */
+.hours-table input[type="text"] {
+    width: 100%;
+    min-width: 250px;
+    max-width: 100%;
+    padding: 0.45rem 0.55rem;
+}
+
+/* Notes column gets extra width */
+.hours-table td:last-child,
+.hours-table th:last-child {
+    width: 40%;
+}
+
+/* Center vertical alignment */
+.hours-table td {
+    vertical-align: middle;
+}
+
+/* Checkbox style */
+.hours-table input[type="checkbox"] {
+    transform: scale(1.1);
+    margin-left: 5px;
+}
+
+
+/* ======================================
+   UPLOAD IMAGE PAGE
+====================================== */
+
+.upload-preview img {
+    max-width: 220px;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* ======================================
+   SUCCESS & ERROR BANNERS
+====================================== */
+
+.banner {
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.banner-success {
+    background: var(--admin-accent-soft);
+    border: 1px solid #bbf7d0;
+    color: #14532d;
+}
+
+.banner-error {
+    background: var(--admin-danger-soft);
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+}
+
+/* ======================================
+   ACTION BUTTONS (PRIMARY / SECONDARY)
+====================================== */
+
+.btn-primary {
+    background: var(--admin-accent);
+    border-color: var(--admin-accent);
+    color: #fff !important;
+}
+
+.btn-primary:hover {
+    background: #256427;
+}
+
+.btn-danger {
+    background: var(--admin-danger);
+    border-color: var(--admin-danger);
+    color: #fff !important;
+}
+
+.btn-danger:hover {
+    background: #7f1d1d;
+}
+
+.btn-secondary {
+    background: #e5e7eb;
+    border: 1px solid var(--admin-border);
+    color: var(--admin-text-main) !important;
+}
+
+.btn-secondary:hover {
+    background: #d1d5db;
+}
