@@ -94,7 +94,7 @@ CREATE TABLE produce_categories (
 
 
 -- =========================
--- Sample Data for farm_hours
+-- Sample Data for farm_hours (Dump)
 -- =========================
 INSERT INTO farm_hours (day_of_week, open_time, close_time, notes, is_closed)
 VALUES
