@@ -1,5 +1,5 @@
 <?php
-require_once("config/db.php");
+require_once("../config/db.php");
 
 // Fetch images from database
 $stmt = $pdo->query("SELECT * FROM gallery_images ORDER BY id DESC");

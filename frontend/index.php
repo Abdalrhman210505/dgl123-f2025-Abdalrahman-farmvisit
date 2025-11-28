@@ -1,5 +1,6 @@
 <?php
-require_once("config/db.php");
+require_once("../config/db.php");
+
 
 // Fetch hours dynamically
 $stmt = $pdo->query("SELECT * FROM farm_hours ORDER BY day_of_week ASC");
