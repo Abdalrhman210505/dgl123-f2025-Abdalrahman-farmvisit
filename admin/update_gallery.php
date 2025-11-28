@@ -48,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <title>Edit Caption</title>
     <link rel="stylesheet" href="../assets/css/admin.css">
+
 </head>
 <body>
 

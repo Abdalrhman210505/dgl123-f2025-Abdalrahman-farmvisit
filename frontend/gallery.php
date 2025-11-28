@@ -1,5 +1,6 @@
 <?php
-require_once("../config/db.php");
+require_once('../config/db.php');
+
 
 // Fetch images from database
 $stmt = $pdo->query("SELECT * FROM gallery_images ORDER BY id DESC");
@@ -13,7 +14,8 @@ $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Gallery</title>
 
-        <link rel="stylesheet" href="style.css">
+       <link rel="stylesheet" href="../assets/css/style.css">
+
 
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>

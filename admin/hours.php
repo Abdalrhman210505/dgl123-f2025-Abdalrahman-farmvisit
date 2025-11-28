@@ -20,6 +20,7 @@ $days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satu
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farm Hours</title>
   <link rel="stylesheet" href="../assets/css/admin.css">
+
 </head>
 <body>
    <main>

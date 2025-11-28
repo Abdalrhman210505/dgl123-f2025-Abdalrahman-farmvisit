@@ -69,6 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <title>Upload Image</title>
     <link rel="stylesheet" href="../assets/css/admin.css">
+
 </head>
 <body>
 

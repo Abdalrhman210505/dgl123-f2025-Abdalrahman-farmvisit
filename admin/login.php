@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") { // checks if the user clicked on th
 <head>
     <title>Admin Login</title>
    <link rel="stylesheet" href="../assets/css/admin.css">
+
 </head>
 <body>
     <main>
