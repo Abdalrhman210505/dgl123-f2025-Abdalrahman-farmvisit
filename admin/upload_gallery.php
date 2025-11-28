@@ -16,30 +16,47 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (!empty($_FILES["image"]["name"])) {
 
-        $fileName = time() . "_" . basename($_FILES["image"]["name"]);
-        $targetPath = "../uploads/" . $fileName;
+        // Validate file extension
+        $allowedExt = ["jpg", "jpeg", "png"];
+        $ext = strtolower(pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION));
 
-        // Validate file type
-        $allowed = ["image/jpeg", "image/png", "image/jpg"];
+        // Validate file size (max 2MB)
+        $maxSize = 2 * 1024 * 1024;
 
-        if (!in_array($_FILES["image"]["type"], $allowed)) {
+        // Validate real image
+        $tmp = $_FILES["image"]["tmp_name"];
+
+        if (!in_array($ext, $allowedExt)) {
             $message = "Only JPG or PNG images allowed.";
-        } else {
-            if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetPath)) {
+        }
+        elseif (!getimagesize($tmp)) {
+            $message = "Invalid image file.";
+        }
+        elseif ($_FILES["image"]["size"] > $maxSize) {
+            $message = "Image must be less than 2MB.";
+        }
+        else {
+
+            // Safe unique file name
+            $fileName = time() . "_" . uniqid() . "." . $ext;
+            $targetPath = "../uploads/" . $fileName;
+
+            if (move_uploaded_file($tmp, $targetPath)) {
 
                 // Insert into DB
-                $stmt = $pdo -> prepare("
+                $stmt = $pdo->prepare("
                     INSERT INTO gallery_images (file_name, caption, uploaded_by)
                     VALUES (?, ?, ?)
                 ");
 
-                $stmt -> execute([$fileName, $caption, $_SESSION["user_id"]]);
+                $stmt->execute([$fileName, $caption, $_SESSION["user_id"]]);
 
                 $message = "Image uploaded successfully!";
             } else {
                 $message = "Upload failed.";
             }
         }
+
     } else {
         $message = "Please select an image.";
     }
