@@ -1,3 +1,6 @@
+/**
+ * Frontend enhancements for navigation, interactions, and scroll handling.
+ */
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -57,94 +60,4 @@ document.addEventListener("DOMContentLoaded", () => {
   backToTop.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
-
-  const galleryImages = document.querySelectorAll(".gallery-grid img");
-  const modal = document.getElementById("imageModal");
-  const modalImage = document.getElementById("modalImage");
-  const modalCaption = document.getElementById("modalCaption");
-  const prevButton = document.getElementById("prevButton");
-  const nextButton = document.getElementById("nextButton");
-  let currentIndex = 0;
-
-  if (galleryImages.length && modal && modalImage && modalCaption && prevButton && nextButton) {
-    galleryImages.forEach((img, index) => {
-      img.addEventListener("click", () => {
-        modal.classList.add("active");
-        currentIndex = index;
-        updateModal();
-      });
-    });
-
-    modal.addEventListener("click", e => {
-      if (e.target === modal) {
-        modal.classList.remove("active");
-      }
-    });
-
-    const updateModal = () => {
-      const currentImage = galleryImages[currentIndex];
-      modalImage.src = currentImage.src;
-      modalCaption.textContent = currentImage.alt;
-    };
-
-    prevButton.addEventListener("click", () => {
-      currentIndex = currentIndex > 0 ? currentIndex - 1 : galleryImages.length - 1;
-      updateModal();
-    });
-
-    nextButton.addEventListener("click", () => {
-      currentIndex = currentIndex < galleryImages.length - 1 ? currentIndex + 1 : 0;
-      updateModal();
-    });
-
-    document.addEventListener("keydown", e => {
-      if (modal.classList.contains("active")) {
-        if (e.key === "ArrowLeft") prevButton.click();
-        else if (e.key === "ArrowRight") nextButton.click();
-        else if (e.key === "Escape") modal.classList.remove("active");
-      }
-    });
-  }
-
-  const bookingForm = document.getElementById("bookingForm");
-  const bookingFeedback = document.getElementById("bookingFeedback");
-
-  if (bookingForm && bookingFeedback) {
-    const setFeedback = (message, isError = false) => {
-      bookingFeedback.textContent = message;
-      bookingFeedback.classList.remove("visually-hidden", "feedback--error", "feedback--success");
-      bookingFeedback.classList.add(isError ? "feedback--error" : "feedback--success");
-    };
-
-    bookingForm.addEventListener("submit", async event => {
-      event.preventDefault();
-      const formData = new FormData(bookingForm);
-      const name = formData.get("name").trim();
-      const phone = formData.get("phone").trim();
-      const email = formData.get("email").trim();
-      const message = formData.get("message").trim();
-
-      if (!name || !phone || !email || !message) {
-        setFeedback("Please fill in all required fields.", true);
-        return;
-      }
-
-      try {
-        const response = await fetch(bookingForm.action, {
-          method: "POST",
-          body: formData
-        });
-        const result = await response.json();
-
-        if (result.success) {
-          setFeedback(result.message);
-          bookingForm.reset();
-        } else {
-          setFeedback(result.message || "Something went wrong.", true);
-        }
-      } catch (error) {
-        setFeedback("Unable to submit your request right now.", true);
-      }
-    });
-  }
 });

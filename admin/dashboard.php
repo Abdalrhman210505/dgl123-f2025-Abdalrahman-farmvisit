@@ -1,23 +1,12 @@
 <?php
+/**
+ * Landing page for admin users linking to key management sections.
+ */
 
-session_start();
-if (!isset($_SESSION["user_id"])) {
-    header("Location: login.php");
-    exit;
-}
+$pageTitle = 'Admin Dashboard';
+require_once __DIR__ . '/includes/header.php';
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Dashboard</title>
-<link rel="stylesheet" href="../assets/css/admin.css">
-
-
-</head>
-<body>
-    <main>
-
-<h1>Welcome, <?= $_SESSION["username"] ?></h1>
+<h1>Welcome, <?= htmlspecialchars($_SESSION['username']) ?></h1>
 
 <ul>
     <li><a href="bookings.php">Manage Bookings</a></li>
@@ -25,6 +14,4 @@ if (!isset($_SESSION["user_id"])) {
     <li><a href="hours.php">Manage Farm Hours</a></li>
     <li><a href="logout.php">Logout</a></li>
 </ul>
-</main>
-</body>
-</html>
+<?php require_once __DIR__ . '/includes/footer.php'; ?>

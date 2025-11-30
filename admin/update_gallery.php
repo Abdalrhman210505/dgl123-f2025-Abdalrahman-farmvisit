@@ -1,75 +1,63 @@
 <?php
-session_start();
-if (!isset($_SESSION["user_id"])) {
-    header("Location: login.php");
-    exit;
-}
+/**
+ * Updates an existing gallery image caption.
+ */
 
-require_once("../config/db.php");
+$pageTitle = 'Edit Caption';
+require_once __DIR__ . '/includes/header.php';
 
-$id = $_GET["id"] ?? null;
+$id = get_param('id');
 
-// No ID? Go back
 if (!$id) {
-    header("Location: gallery.php");
+    header('Location: gallery.php');
     exit;
 }
 
-// Fetch image
-$stmt = $pdo->prepare("SELECT * FROM gallery_images WHERE image_id = ?");
-$stmt->execute([$id]);
-$image = $stmt->fetch(PDO::FETCH_ASSOC);
+try {
+    $stmt = $pdo->prepare('SELECT * FROM gallery_images WHERE image_id = ?');
+    $stmt->execute([$id]);
+    $image = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$image) {
-    header("Location: gallery.php");
+    if (!$image) {
+        header('Location: gallery.php');
+        exit;
+    }
+} catch (PDOException $e) {
+    set_flash('error', 'Unable to load image: ' . $e->getMessage());
+    header('Location: gallery.php');
     exit;
 }
 
-$message = "";
+$message = '';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $caption = trim($_POST["caption"]);
-
-    $stmt = $pdo->prepare("
-        UPDATE gallery_images 
-        SET caption = ? 
-        WHERE image_id = ?
-    ");
-
-    $stmt->execute([$caption, $id]);
-
-    $message = "Caption updated successfully!";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $caption = post_param('caption');
+    try {
+        $stmt = $pdo->prepare('UPDATE gallery_images SET caption = ? WHERE image_id = ?');
+        if ($stmt->execute([$caption, $id])) {
+            set_flash('success', 'Caption updated successfully!');
+            header('Location: gallery.php');
+            exit;
+        }
+    } catch (PDOException $e) {
+        $message = 'Unable to update caption: ' . $e->getMessage();
+    }
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Caption</title>
-    <link rel="stylesheet" href="../assets/css/admin.css">
-
-</head>
-<body>
-
-<main>
 <h1>Edit Image Caption</h1>
 
 <?php if ($message): ?>
-    <p style="color:green;"><?= $message ?></p>
+    <div class="banner banner-error"><?= htmlspecialchars($message) ?></div>
 <?php endif; ?>
 
-<img src="../uploads/<?= htmlspecialchars($image['file_name']) ?>" width="200"><br><br>
+<img src="../uploads/<?= sanitize_text($image['file_name']) ?>" width="200" alt="Selected image"><br><br>
 
 <form method="POST">
     <label>Caption</label><br>
-    <input type="text" name="caption" value="<?= htmlspecialchars($image['caption']) ?>" required><br><br>
+    <input type="text" name="caption" value="<?= sanitize_text($image['caption']) ?>" required><br><br>
 
     <button type="submit">Save Changes</button>
 </form>
 
 <p><a href="gallery.php">⬅ Back to Gallery</a></p>
-</main>
-
-</body>
-</html>
+<?php require_once __DIR__ . '/includes/footer.php'; ?>

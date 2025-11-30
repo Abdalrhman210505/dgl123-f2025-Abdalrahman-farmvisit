@@ -1,33 +1,23 @@
 <?php
-session_start();
-if (!isset($_SESSION["user_id"])) {
-    header("Location: login.php");
-    exit;
+/**
+ * Displays booking requests for admins to review and update.
+ */
+
+$pageTitle = 'Manage Bookings';
+require_once __DIR__ . '/includes/header.php';
+
+$bookings = [];
+try {
+    $stmt = $pdo->query('SELECT * FROM bookings ORDER BY created_at DESC');
+    $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    set_flash('error', 'Unable to load bookings: ' . $e->getMessage());
 }
-require_once("../config/db.php");
-
-
-$stmt = $pdo->query("SELECT * FROM bookings ORDER BY created_at DESC");
-$bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
+<h1>Manage Bookings</h1>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Bookings</title>
-    <link rel="stylesheet" href="../assets/css/admin.css">
-
-</head>
-
-<body>
-    <main>
-        <h1>Manage Bookings</h1>
-
-        <table>
-
-        <tr>
+<table>
+    <tr>
         <th>ID</th>
         <th>Visitor Name</th>
         <th>Email</th>
@@ -37,29 +27,22 @@ $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <th>Status</th>
         <th>Actions</th>
     </tr>
-<?php foreach ($bookings as $b): ?>
- <tr>
-        <td><?= $b["booking_id"] ?></td>
-        <td><?= htmlspecialchars($b["visitor_name"]) ?></td> <!-- I have used special chars method to protect the page from xos attacks-->
-        <td><?= htmlspecialchars($b["email"]) ?></td>
-        <td><?= $b["visit_date"] ?></td>
-        <td><?= $b["visit_time"] ?></td>
-        <td><?= $b["party_size"] ?></td>
-        <td><?= $b["status"] ?></td>
-        <td>
-            <a href="update_booking.php?id=<?= $b["booking_id"] ?>&status=confirmed">Confirm</a> |
-            <a href="update_booking.php?id=<?= $b["booking_id"] ?>&status=cancelled">Cancel</a>
-        </td>
-    </tr>
-    <?php endforeach ?>
+    <?php foreach ($bookings as $booking): ?>
+        <tr>
+            <td><?= $booking['booking_id'] ?></td>
+            <td><?= sanitize_text($booking['visitor_name']) ?></td>
+            <td><?= sanitize_text($booking['email']) ?></td>
+            <td><?= $booking['visit_date'] ?></td>
+            <td><?= $booking['visit_time'] ?></td>
+            <td><?= $booking['party_size'] ?></td>
+            <td><?= $booking['status'] ?></td>
+            <td>
+                <a href="update_booking.php?id=<?= $booking['booking_id'] ?>&status=confirmed">Confirm</a> |
+                <a href="update_booking.php?id=<?= $booking['booking_id'] ?>&status=cancelled">Cancel</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>
 
-    
-        </table>
-
-        <p><a href="dashboard.php">⬅ Back to Dashboard</a></p>
-
-
-    </main>
-    
-</body>
-</html>
+<p><a href="dashboard.php">⬅ Back to Dashboard</a></p>
+<?php require_once __DIR__ . '/includes/footer.php'; ?>

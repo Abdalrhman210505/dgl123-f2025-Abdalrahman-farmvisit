@@ -1,68 +1,55 @@
 <?php
-session_start();
-require_once("../config/db.php");
+/**
+ * Admin registration page allowing staff to create login credentials.
+ */
 
-$message = "";
+$requireAuth = false;
+$pageTitle = 'Admin Registration';
+require_once __DIR__ . '/includes/header.php';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+$message = '';
 
-    $username = trim($_POST["username"]); // trim is to remove unwanted spaces or weird symbols
-    $email    = trim($_POST["email"]);
-    $fullName = trim($_POST["full_name"]);
-    $password = $_POST["password"];
-    $confirm  = $_POST["confirm_password"];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = post_param('username');
+    $email = post_param('email');
+    $fullName = post_param('full_name');
+    $password = trim($_POST['password'] ?? '');
+    $confirm = trim($_POST['confirm_password'] ?? '');
 
-    // Making sure that there is no empty fields
-    if ($username === "" || $email === "" || $password === "") {
-        $message = "All fields are required.";
-    }
-    // Check password match
-    elseif ($password !== $confirm) {
-        $message = "Passwords do not match.";
-    } 
-    else {
+    if ($username === '' || $email === '' || $password === '') {
+        $message = 'All fields are required.';
+    } elseif ($password !== $confirm) {
+        $message = 'Passwords do not match.';
+    } else {
+        try {
+            $stmt = $pdo->prepare('SELECT COUNT(*) FROM users WHERE username = ?');
+            $stmt->execute([$username]);
 
-        // Check if username exists
-        $stmt = $pdo -> prepare("SELECT * FROM users WHERE username = ?");
-        $stmt -> execute([$username]);
+            if ($stmt->fetchColumn() > 0) {
+                $message = 'Username already taken.';
+            } else {
+                $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+                $insert = $pdo->prepare(
+                    'INSERT INTO users (username, password_hash, email, full_name, role) VALUES (?, ?, ?, ?, "staff")'
+                );
 
-        if ($stmt -> rowCount() > 0) {
-            $message = "Username already taken.";
-        } else {
-
-            // Hash password
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
-            // Insert user
-            $stmt = $pdo -> prepare("
-                INSERT INTO users (username, password_hash, email, full_name, role)
-                VALUES (?, ?, ?, ?, 'staff')
-            ");
-            $stmt -> execute([$username, $passwordHash, $email, $fullName]);
-
-            $message = "Registration successful! You may now log in.";
-            header("Location: login.php");
+                if ($insert->execute([$username, $passwordHash, $email, $fullName])) {
+                    set_flash('success', 'Registration successful! You may now log in.');
+                    header('Location: login.php');
+                    exit;
+                }
+            }
+        } catch (PDOException $e) {
+            $message = 'Database error: ' . $e->getMessage();
         }
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-  <link rel="stylesheet" href="../assets/css/admin.css">
-
-</head>
-<body>
-    <main>
 <?php if ($message): ?>
-    <p style="color: red;"><?= $message ?></p>
+    <div class="banner banner-error"><?= htmlspecialchars($message) ?></div>
 <?php endif; ?>
 
 <form method="POST">
-
     <label>Username:</label><br>
     <input type="text" name="username" required><br><br>
 
@@ -79,11 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <input type="password" name="confirm_password" required><br><br>
 
     <button type="submit">Register</button>
-
 </form>
 
-<p><a href="login.php"><- Back to Login</a></p>
-
-    </main>
-</body>
-</html>
+<p><a href="login.php" class="btn-secondary">Back to Login</a></p>
+<?php require_once __DIR__ . '/includes/footer.php'; ?>

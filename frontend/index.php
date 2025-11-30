@@ -1,6 +1,8 @@
 <?php
-require_once("../config/db.php");
-
+/**
+ * Front page showing farm overview and dynamic hours table.
+ */
+require_once('../config/db.php');
 
 // Fetch hours dynamically
 $stmt = $pdo->query("SELECT * FROM farm_hours ORDER BY day_of_week ASC");
@@ -14,27 +16,20 @@ $days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satu
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-
     <link rel="stylesheet" href="../assets/css/style.css">
-
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
-
 <header>
     <a href="index.php">
         <img class="logo" src="images/kehler-logo1.png" alt="kehler logo" loading="lazy">
     </a>
-
     <nav>
         <a class="toggle" onclick="showNav()">
             <i class="fa fa-bars" aria-hidden="true"></i>
@@ -46,17 +41,13 @@ $days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satu
         </ul>
     </nav>
 </header>
-
-<!-- Mobile nav script -->
 <script>
 function showNav() {
     var element = document.getElementById("nav-items");
     element.classList.toggle("show-items");
 }
 </script>
-
 <main>
-
     <section class="hero-section">
         <div class="hero-container">
             <div>
@@ -68,13 +59,10 @@ function showNav() {
                     locally grown and sustainable produce.
                 </p>
             </div>
-
             <h2>Address: #8083, Black Creek, BC V9J 1G9</h2>
         </div>
-
         <img src="images/kehler's-farm.jpg" alt="the farm picture" loading="lazy">
     </section>
-
     <section class="about-us-section">
         <div>
             <h2>How We Grow</h2>
@@ -84,18 +72,14 @@ function showNav() {
         </div>
         <img src="images/kehler's2-farm.jpg" alt="produce" loading="lazy">
     </section>
-
     <section class="youtube-embed">
         <iframe src="https://www.youtube.com/embed/j00nyVYsemw?si=nuKFvadjaUhRjJE2"
         title="YouTube video player"
         referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen></iframe>
     </section>
-
-    <!-- ⭐ DYNAMIC FARM HOURS ⭐ -->
     <section class="farm-hours">
         <h3>Available Hours</h3>
-
         <table>
             <thead>
                 <tr>
@@ -104,14 +88,10 @@ function showNav() {
                     <th>Farm Visits</th>
                 </tr>
             </thead>
-
             <tbody>
-
             <?php foreach ($hours as $h): ?>
                 <tr>
                     <td><?= $days[$h["day_of_week"]] ?></td>
-
-                    <!-- OPEN/CLOSE or CLOSED display -->
                     <td>
                         <?php if ($h["is_closed"]): ?>
                             Closed
@@ -121,8 +101,6 @@ function showNav() {
                             <?= date("g:i A", strtotime($h["close_time"])) ?>
                         <?php endif; ?>
                     </td>
-
-                    <!-- NOTES (Farm visits column) -->
                     <td>
                         <?php
                             echo $h["notes"]
@@ -132,27 +110,22 @@ function showNav() {
                     </td>
                 </tr>
             <?php endforeach; ?>
-
             </tbody>
         </table>
     </section>
-
 </main>
-
 <footer>
     <nav>
         <div class="footer-container">
             <img class="logo" src="images/kehler-logo1.png" alt="kehler logo" loading="lazy">
-
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="gallery.php">Gallery</a></li>
             </ul>
-
             <ul class="end-footer">
                 <li>
-                    Follow along with the farm...  
+                    Follow along with the farm...
                     <div>
                         <a href="https://www.instagram.com/kehlervegetables" target="_blank">
                             <img src="images/instagram.png" alt="instagram logo" loading="lazy">
@@ -163,13 +136,10 @@ function showNav() {
             </ul>
         </div>
     </nav>
-
     <div class="divider">
         <h4>©2024 - <span>This is fictional website for a college project</span> | All rights reserved</h4>
     </div>
 </footer>
-
 <script src="../assets/js/main.js"></script>
-
 </body>
 </html>

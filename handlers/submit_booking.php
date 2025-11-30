@@ -1,4 +1,8 @@
 <?php
+/**
+ * Handles AJAX booking submissions from the public site.
+ */
+
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -9,11 +13,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 require_once __DIR__ . '/../config/db.php';
 
-// Collect and sanitize input
-$visitorName = trim($_POST['name'] ?? '');
-$email = trim($_POST['email'] ?? '');
-$phone = trim($_POST['phone'] ?? '');
-$message = trim($_POST['message'] ?? '');
+function clean(string $value): string
+{
+    return htmlspecialchars(trim($value), ENT_QUOTES, 'UTF-8');
+}
+
+$visitorName = clean($_POST['name'] ?? '');
+$email = clean($_POST['email'] ?? '');
+$phone = clean($_POST['phone'] ?? '');
+$message = clean($_POST['message'] ?? '');
 
 $errors = [];
 if ($visitorName === '') {

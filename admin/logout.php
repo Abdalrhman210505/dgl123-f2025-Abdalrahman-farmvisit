@@ -1,8 +1,11 @@
 <?php
-session_start();
-session_unset();       
-session_destroy();      
+/**
+ * Terminates the admin session and returns user to the login page.
+ */
 
-header("Location: login.php");   //take user to login page
-exit;                  
-?>
+require_once __DIR__ . '/includes/admin_bootstrap.php';
+session_unset();
+session_destroy();
+
+header('Location: login.php');
+exit;

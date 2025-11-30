@@ -1,48 +1,45 @@
 <?php
-session_start();
-require_once("../config/db.php");
+/**
+ * Admin login page that authenticates staff and starts a secure session.
+ */
 
-// For showing errors
-$error = "";
+$requireAuth = false;
+$pageTitle = 'Admin Login';
+require_once __DIR__ . '/includes/header.php';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") { // checks if the user clicked on the button
-    $username = trim($_POST["username"]); //trim for the accidental spaces before or after in the username field
-    $password = $_POST["password"];
+$error = '';
 
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->execute([$username]);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = post_param('username');
+    $password = trim($_POST['password'] ?? '');
 
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    try {
+        $stmt = $pdo->prepare('SELECT * FROM users WHERE username = ?');
+        $stmt->execute([$username]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user && password_verify($password, $user["password_hash"])) { // checks if the username and passowrd hash translated encrypt again and verify 
-        session_regenerate_id(true);
-        $_SESSION["user_id"] = $user["user_id"];
-        $_SESSION["username"] = $user["username"];
+        if ($user && password_verify($password, $user['password_hash'])) {
+            session_regenerate_id(true);
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['username'] = $user['username'];
+            set_flash('success', 'Login successful.');
+            header('Location: dashboard.php');
+            exit;
+        }
 
-        header("Location: dashboard.php");
-        exit;
-    } else {
-        $error = "Invalid username or password.";
+        $error = 'Invalid username or password.';
+    } catch (PDOException $e) {
+        $error = 'Database error: ' . $e->getMessage();
     }
 }
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Login</title>
-   <link rel="stylesheet" href="../assets/css/admin.css">
-
-</head>
-<body>
-    <main>
-
 <h2>Admin Login</h2>
 
 <?php if ($error): ?>
-<p style="color:red;"><?= $error ?></p>  <!-- if there is an error the error text color will be red -->
+    <div class="banner banner-error"><?= htmlspecialchars($error) ?></div>
 <?php endif; ?>
 
-<form method="POST"> <!--  this firm is the login the user has to submit-->
+<form method="POST">
     <label>Username</label><br>
     <input type="text" name="username" required><br><br>
 
@@ -51,10 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") { // checks if the user clicked on th
 
     <button type="submit">Login</button>
     <br><br>
-<a href="register.php" style="display:inline-block; padding:8px 12px; background:#eee; border:1px solid #ccc; text-decoration:none;">
-    Create New Account
-</a>
+    <a href="register.php" class="btn-secondary">Create New Account</a>
 </form>
-</main>
-</body>
-</html>
+<?php require_once __DIR__ . '/includes/footer.php'; ?>

@@ -1,4 +1,4 @@
-# Farm Visit Showcase – DGL 123 (Milestone 3)
+# Farm Visit Showcase – DGL 123 (Milestone 4)
 
 This project is part of **DGL 123 – PHP & MySQL** at North Island College.  
 It implements a small-scale farm visit showcase website with a functional **PHP/MySQL** backend and a protected **admin dashboard**.  
@@ -162,6 +162,16 @@ Before logging in, create an account:
 http://localhost/dgl123-f2025-Abdalrahman-farmvisit/admin/register.php
 
 This creates your staff user.
+---
+
+## 🆕 Milestone 4 Summary
+
+- Added reusable admin header/footer with centralized authentication, input sanitization, and flash message handling.
+- Ensured every admin page uses forward-slash CSS paths and session protection.
+- Improved database access with prepared statements and guarded execution.
+- Cleaned up file upload validation, booking submission handling, and general formatting.
+- Documented files with purpose comments and refreshed frontend asset links.
+
 ✨ Features Implemented
 🔐 User Authentication
 

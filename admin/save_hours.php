@@ -1,37 +1,32 @@
 <?php
-session_start();
-if (!isset($_SESSION["user_id"])) {
-    header("Location: login.php");
-    exit;
-}
-require_once("../config/db.php");
+/**
+ * Persists updated farm hours submitted from the admin form.
+ */
 
-// Getting all submitted form data
-$open_times  = $_POST["open_time"];
-$close_times = $_POST["close_time"];
-$notes       = $_POST["notes"];
-$is_closed   = $_POST["is_closed"] ?? []; // Checkbox array
+$pageTitle = 'Save Hours';
+require_once __DIR__ . '/includes/header.php';
 
-// Loop through all 7 days (0 to 6)
+$openTimes = $_POST['open_time'] ?? [];
+$closeTimes = $_POST['close_time'] ?? [];
+$notes = $_POST['notes'] ?? [];
+$isClosed = $_POST['is_closed'] ?? [];
+
 for ($day = 0; $day <= 6; $day++) {
+    $open = $openTimes[$day] ?? null;
+    $close = $closeTimes[$day] ?? null;
+    $note = sanitize_text($notes[$day] ?? '');
+    $closed = isset($isClosed[$day]) ? 1 : 0;
 
-    $open  = $open_times[$day] ?? null;
-    $close = $close_times[$day] ?? null;
-    $note  = $notes[$day] ?? "";
-
-    // Checkbox: if not checked → treat as 0
-    $closed = isset($is_closed[$day]) ? 1 : 0;
-
-    // Update query
-    $stmt = $pdo -> prepare("
-        UPDATE farm_hours
-        SET open_time = ?, close_time = ?, notes = ?, is_closed = ?
-        WHERE day_of_week = ?
-    ");
-
-    $stmt -> execute([$open, $close, $note, $closed, $day]);
+    try {
+        $stmt = $pdo->prepare(
+            'UPDATE farm_hours SET open_time = ?, close_time = ?, notes = ?, is_closed = ? WHERE day_of_week = ?'
+        );
+        $stmt->execute([$open, $close, $note, $closed, $day]);
+    } catch (PDOException $e) {
+        set_flash('error', 'Unable to save hours: ' . $e->getMessage());
+    }
 }
 
-// Redirect back
-header("Location: hours.php");
+set_flash('success', 'Hours updated successfully.');
+header('Location: hours.php');
 exit;
