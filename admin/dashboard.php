@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 if (!isset($_SESSION["user_id"])) {
     header("Location: login.php");
@@ -9,7 +10,8 @@ if (!isset($_SESSION["user_id"])) {
 <html>
 <head>
     <title>Admin Dashboard</title>
-   <link rel="stylesheet" href="../assets/css/admin.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
+
 
 </head>
 <body>
