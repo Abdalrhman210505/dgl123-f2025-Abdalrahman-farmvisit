@@ -7,14 +7,15 @@ if (!isset($_SESSION["user_id"])) {
 
 require_once("../config/db.php");
 
-$id = $_GET["id"] ?? null;
+// Sanitize ID from GET
+$id = isset($_GET["id"]) ? intval($_GET["id"]) : null;
 
 if (!$id) {
     header("Location: gallery.php");
     exit;
 }
 
-// 1. Get the file name first
+// 1. Get the file name from DB
 $stmt = $pdo->prepare("SELECT file_name FROM gallery_images WHERE image_id = ?");
 $stmt->execute([$id]);
 $image = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -24,17 +25,16 @@ if (!$image) {
     exit;
 }
 
-// 2. Delete the image file from /uploads
+// 2. Delete the actual file
 $filePath = "../uploads/" . $image["file_name"];
-
 if (file_exists($filePath)) {
     unlink($filePath);
 }
 
-// 3. Delete from the database
+// 3. Delete database entry
 $stmt = $pdo->prepare("DELETE FROM gallery_images WHERE image_id = ?");
 $stmt->execute([$id]);
 
-// 4. Redirect back to gallery
+// 4. Redirect
 header("Location: gallery.php");
 exit;
