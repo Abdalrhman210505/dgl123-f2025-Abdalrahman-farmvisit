@@ -1,204 +1,275 @@
-/* ======================================
-   ACTION BUTTONS (Edit, Delete, Confirm)
-====================================== */
+/* =======================================================
+   ADMIN PANEL – Simple & User-Friendly Stylesheet
+   Works on: Dashboard, Login, Gallery, Bookings, Hours
+======================================================== */
 
-.table-actions a {
-    margin-right: 0.5rem;
-    font-weight: 600;
+/* ------------- Color Variables ---------------- */
+:root {
+    --bg: #f4f6f8;
+    --surface: #ffffff;
+    --border: #d1d5db;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --primary: #2f7d32;
+    --primary-dark: #256427;
+    --danger: #b91c1c;
+    --danger-dark: #7f1d1d;
 }
 
-.action-edit {
-    color: var(--admin-accent);
+/* ------------- Reset ---------------- */
+* {
+    box-sizing: border-box;
 }
 
-.action-edit:hover {
-    text-decoration: underline;
-}
-
-.action-delete {
-    color: var(--admin-danger);
-}
-
-.action-delete:hover {
-    text-decoration: underline;
-}
-
-
-
-/* ======================================
-   DASHBOARD CARDS
-====================================== */
-
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.25rem;
-    margin-top: 1.5rem;
-}
-
-.dashboard-card {
-    padding: 1.25rem;
-    background: var(--admin-surface);
-    border-radius: 0.75rem;
-    border: 1px solid var(--admin-border);
-    box-shadow: 0 6px 12px rgba(15,23,42,0.06);
-    text-decoration: none;
-    color: var(--admin-text-main);
-    transition: transform 0.12s ease, box-shadow 0.12s ease;
-}
-
-.dashboard-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 16px rgba(15,23,42,0.11);
-}
-
-.dashboard-card h3 {
+body {
     margin: 0;
-    font-size: 1.2rem;
+    padding: 0;
+    font-family: system-ui, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
 }
 
-.dashboard-card p {
-    margin: 0.5rem 0 0;
-    color: var(--admin-text-muted);
-    font-size: 0.9rem;
+main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: var(--surface);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-/* ======================================
-   LOGIN / REGISTER PAGE
-====================================== */
-
-.auth-wrapper {
-    max-width: 500px;
-    margin: 4rem auto;
-    background: var(--admin-surface);
-    padding: 2rem 2rem;
-    border-radius: 0.75rem;
-    border: 1px solid var(--admin-border);
-    box-shadow: 0 8px 18px rgba(15,23,42,0.08);
+/* ------------- Headings ---------------- */
+h1 {
+    margin-top: 0;
+    font-size: 1.8rem;
 }
 
-.auth-wrapper h2 {
-    text-align: center;
+h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
 }
 
-.auth-wrapper form {
-    margin-top: 1.5rem;
+/* ------------- Links ---------------- */
+a {
+    color: var(--primary);
+    text-decoration: none;
 }
 
-.auth-wrapper p {
-    text-align: center;
+a:hover {
+    text-decoration: underline;
 }
 
-/* ======================================
-   HOURS PAGE TABLE (FIXED VERSION)
-====================================== */
-
-/* Make form full width ONLY on Hours page */
-.hours-page-form {
-    max-width: 100% !important;
+/* Back links */
+.back-link {
+    margin-top: 1rem;
+    display: inline-block;
 }
 
-/* Table expands naturally */
-.hours-table {
-    width: 100%;
-    table-layout: auto;
+/* ------------- Buttons ---------------- */
+button,
+input[type="submit"] {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 0.55rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
 }
 
-/* Time inputs */
-.hours-table input[type="time"],
-.hours-table input[type="number"] {
-    max-width: 120px;
+button:hover,
+input[type="submit"]:hover {
+    background: var(--primary-dark);
 }
 
-/* Notes input expands fully */
-.hours-table input[type="text"] {
-    width: 100%;
-    min-width: 250px;
-    max-width: 100%;
-    padding: 0.45rem 0.55rem;
-}
-
-/* Notes column gets extra width */
-.hours-table td:last-child,
-.hours-table th:last-child {
-    width: 40%;
-}
-
-/* Center vertical alignment */
-.hours-table td {
-    vertical-align: middle;
-}
-
-/* Checkbox style */
-.hours-table input[type="checkbox"] {
-    transform: scale(1.1);
-    margin-left: 5px;
-}
-
-
-/* ======================================
-   UPLOAD IMAGE PAGE
-====================================== */
-
-.upload-preview img {
-    max-width: 220px;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-/* ======================================
-   SUCCESS & ERROR BANNERS
-====================================== */
-
-.banner {
-    padding: 0.8rem 1rem;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-}
-
-.banner-success {
-    background: var(--admin-accent-soft);
-    border: 1px solid #bbf7d0;
-    color: #14532d;
-}
-
-.banner-error {
-    background: var(--admin-danger-soft);
-    border: 1px solid #fecaca;
-    color: #b91c1c;
-}
-
-/* ======================================
-   ACTION BUTTONS (PRIMARY / SECONDARY)
-====================================== */
-
-.btn-primary {
-    background: var(--admin-accent);
-    border-color: var(--admin-accent);
-    color: #fff !important;
-}
-
-.btn-primary:hover {
-    background: #256427;
-}
-
+/* Danger button */
 .btn-danger {
-    background: var(--admin-danger);
-    border-color: var(--admin-danger);
-    color: #fff !important;
+    background: var(--danger);
 }
 
 .btn-danger:hover {
-    background: #7f1d1d;
+    background: var(--danger-dark);
 }
 
+/* Secondary button */
 .btn-secondary {
     background: #e5e7eb;
-    border: 1px solid var(--admin-border);
-    color: var(--admin-text-main) !important;
+    color: var(--text);
 }
 
 .btn-secondary:hover {
     background: #d1d5db;
+}
+
+/* ------------- Form styling ---------------- */
+form {
+    max-width: 420px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="time"],
+input[type="number"],
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+    transform: scale(1.2);
+    margin-left: 0.3rem;
+}
+
+/* ------------- Tables (Bookings, Gallery, Hours) ---------------- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+/* ======================================
+   FIX NOTES COLUMN IN HOURS PAGE
+====================================== */
+
+/* Make Hours table expand naturally */
+.hours-table {
+    width: 100%;
+    table-layout: auto !important;
+}
+
+/* Make the Notes column wider */
+.hours-table th:nth-child(5),
+.hours-table td:nth-child(5) {
+    width: 45% !important;
+    max-width: 45% !important;
+}
+
+/* Make input text inside Notes expand fully */
+.hours-table td:nth-child(5) input[type="text"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 300px !important;
+    white-space: normal !important;
+}
+
+/* Prevent table cells from shrinking text */
+.hours-table td {
+    white-space: normal !important;
+    overflow: visible !important;
+}
+
+
+
+th, td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+}
+
+th {
+    background: #eef2ff;
+    font-weight: 600;
+}
+
+tr:nth-child(even) td {
+    background: #fafafa;
+}
+
+.table-actions a {
+    margin-right: 10px;
+    font-weight: 600;
+}
+
+.action-edit {
+    color: var(--primary);
+}
+
+.action-delete {
+    color: var(--danger);
+}
+
+/* ------------- Images in gallery ---------------- */
+table img {
+    width: 120px;
+    height: auto;
+    border-radius: 6px;
+}
+
+/* ------------- Login/Register Layout ---------------- */
+.auth-container {
+    max-width: 400px;
+    margin: 4rem auto;
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.auth-container h2 {
+    margin-bottom: 1rem;
+}
+
+/* ------------- Dashboard ---------------- */
+.dashboard-container {
+    text-align: center;
+}
+
+.admin-nav {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+}
+
+.admin-nav li {
+    margin: 0.75rem 0;
+}
+
+.admin-nav a {
+    display: block;
+    padding: 0.75rem;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.admin-nav a:hover {
+    background: var(--primary-dark);
+}
+
+/* ------------- Alerts ---------------- */
+.success {
+    padding: 10px;
+    background: #d1fae5;
+    border-left: 4px solid #059669;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+}
+
+.error {
+    padding: 10px;
+    background: #fee2e2;
+    border-left: 4px solid #b91c1c;
+    margin-bottom: 1rem;
+    border-radius: 6px;
 }
