@@ -1,55 +1,83 @@
 <?php
 require_once('../config/db.php');
 
-
 // Fetch images from database
-$stmt = $pdo->query("SELECT * FROM gallery_images ORDER BY id DESC");
+$stmt = $pdo->query("SELECT * FROM gallery_images ORDER BY image_id DESC");
 $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Gallery</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
 
-       <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-
-        <!--the ham bar function -->
-        <script>
-        function showNav() {
-            var element = document.getElementById("nav-items");
-            element.classList.toggle("show-items");
+    <!-- Responsive gallery grid -->
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
         }
-        </script>
 
-        <style>
-            /* Ensure gallery is grid responsive like the original */
-            .gallery-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 1rem;
-                padding: 1rem;
-            }
+        .gallery-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+        }
 
-            .gallery-grid img {
-                width: 100%;
-                height: 250px;
-                object-fit: cover;
-                border-radius: 8px;
-                cursor: pointer;
-            }
-        </style>
-    </head>
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content img {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 10px;
+        }
+
+        .caption {
+            text-align: center;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .nav-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 0 20px;
+            user-select: none;
+        }
+    </style>
+
+    <script>
+    function showNav() {
+        document.getElementById("nav-items").classList.toggle("show-items");
+    }
+    </script>
+
+</head>
 
 <body>
 
@@ -58,7 +86,7 @@ $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <nav>
       <a class="toggle" onclick="showNav()">
-        <i class="fa fa-bars" aria-hidden="true"></i>
+        <i class="fa fa-bars"></i>
       </a>
       
       <ul id="nav-items">
@@ -77,15 +105,14 @@ $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Gallery Grid -->
     <div class="gallery-grid">
 
-        <?php if (count($images) > 0): ?>
-            <?php foreach ($images as $i): ?>
+        <?php if (!empty($images)): ?>
+            <?php foreach ($images as $img): ?>
                 <img 
-                    src="uploads/<?= htmlspecialchars($i['file_name']) ?>" 
-                    alt="<?= htmlspecialchars($i['caption']) ?>"
+                    src="../uploads/<?= htmlspecialchars($img['file_name']) ?>" 
+                    alt="<?= htmlspecialchars($img['caption']) ?>"
                     class="gallery-img"
                 >
             <?php endforeach; ?>
-
         <?php else: ?>
             <p style="padding:20px;">No images found in the gallery.</p>
         <?php endif; ?>
