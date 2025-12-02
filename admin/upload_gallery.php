@@ -16,24 +16,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (!empty($_FILES["image"]["name"])) {
 
-        // Validate file extension
-        $allowedExt = ["jpg", "jpeg", "png"];
+        // Allow more formats
+        $allowedExt = ["jpg", "jpeg", "png", "webp"];
         $ext = strtolower(pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION));
 
-        // Validate file size (max 2MB)
-        $maxSize = 2 * 1024 * 1024;
+        // Raise max upload size (25MB)
+        $maxSize = 25 * 1024 * 1024;
 
         // Validate real image
         $tmp = $_FILES["image"]["tmp_name"];
 
         if (!in_array($ext, $allowedExt)) {
-            $message = "Only JPG or PNG images allowed.";
+            $message = "Only JPG, PNG, or WEBP images allowed.";
         }
         elseif (!getimagesize($tmp)) {
-            $message = "Invalid image file.";
+            $message = "Invalid image file (not a real image).";
         }
         elseif ($_FILES["image"]["size"] > $maxSize) {
-            $message = "Image must be less than 2MB.";
+            $message = "Image is too large (max 25MB).";
         }
         else {
 
