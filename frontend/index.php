@@ -32,7 +32,7 @@ $days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satu
 
 <header>
     <a href="index.php">
-        <img class="logo" src="images/kehler-logo1.png" alt="kehler logo" loading="lazy">
+        <img class="logo" src="../assets/images/kehler-logo1.png" alt="kehler logo" loading="lazy">
     </a>
 
     <nav>
@@ -72,7 +72,7 @@ function showNav() {
             <h2>Address: #8083, Black Creek, BC V9J 1G9</h2>
         </div>
 
-        <img src="images/kehler's-farm.jpg" alt="the farm picture" loading="lazy">
+        <img src="../assets/images/kehler's-farm.jpg" alt="the farm picture" loading="lazy">
     </section>
 
     <section class="about-us-section">
@@ -82,7 +82,7 @@ function showNav() {
                 Our farm runs on a best practice system... (your text unchanged)
             </p>
         </div>
-        <img src="images/kehler's2-farm.jpg" alt="produce" loading="lazy">
+        <img src="../assets/images/kehler's2-farm.jpg" alt="produce" loading="lazy">
     </section>
 
     <section class="youtube-embed">
@@ -142,7 +142,7 @@ function showNav() {
 <footer>
     <nav>
         <div class="footer-container">
-            <img class="logo" src="images/kehler-logo1.png" alt="kehler logo" loading="lazy">
+            <img class="logo" src="../assets/images/kehler-logo1.png" alt="kehler logo" loading="lazy">
 
             <ul>
                 <li><a href="index.php">Home</a></li>
@@ -155,7 +155,7 @@ function showNav() {
                     Follow along with the farm...  
                     <div>
                         <a href="https://www.instagram.com/kehlervegetables" target="_blank">
-                            <img src="images/instagram.png" alt="instagram logo" loading="lazy">
+                            <img src="../assets/images/instagram.png" alt="instagram logo" loading="lazy">
                             @kehlervegetables
                         </a>
                     </div>

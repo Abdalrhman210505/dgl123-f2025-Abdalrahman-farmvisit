@@ -1,3 +1,30 @@
+<?php
+require_once("../config/db.php");
+
+$message = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $name    = trim($_POST["name"]);
+    $phone   = trim($_POST["phone"]);
+    $email   = trim($_POST["email"]);
+    $content = trim($_POST["message"]);
+
+    if ($name === "" || $email === "" || $content === "") {
+        $message = "Please fill in all required fields.";
+    } else {
+
+        $stmt = $pdo->prepare("
+            INSERT INTO bookings (visitor_name, email, phone, notes, status)
+            VALUES (?, ?, ?, ?, 'new')
+        ");
+
+        $stmt->execute([$name, $email, $phone, $content]);
+
+        $message = "Your message has been submitted! We will contact you soon.";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +55,7 @@
 
 <body>
         <header>
-<a href="index.html"><img class="logo" src="images/kehler-logo1.png" alt="kehler logo"></a>
+<a href="index.php"><img class="logo" src="../assets/images/kehler-logo1.png"  alt="kehler logo"></a>
 
 
 
@@ -38,13 +65,13 @@
 ></a>
     <ul id="nav-items">
         <li>
-            <a href="index.html">Home</a>
+            <a href="index.php">Home</a>
         </li>
         <li>
-            <a href="contact.html">Contact Us</a>
+            <a href="contact.php">Contact Us</a>
         </li>
         <li>
-            <a href="gallery.html">Gallery</a>
+            <a href="gallery.php">Gallery</a>
         </li>
        
     </ul>
@@ -52,6 +79,13 @@
 
     </header>
     <main>
+
+<?php if ($message): ?>
+    <p style="color: green; font-weight: bold; padding: 10px 0;">
+        <?= $message ?>
+    </p>
+<?php endif; ?>
+
         <section class="hero-section-contact">
             <h1>Contact Us information</h1>
 
@@ -75,7 +109,7 @@
         <section class="contact-section">
         
                 <h2>Plan Your Visit</h2>
-                <form>
+                <form method="POST" action="contact.php">
                     <label for="name">Name<span>    *required</span></label>
                     <input type="text" id="name" name="name" placeholder="Your Name" required>
                     
@@ -86,9 +120,9 @@
                     <input type="email" id="email" name="email" placeholder="Your Email" required>
                     
                     <label for="message">Message<span>    *required</span></label>
-                    <textarea id="message" name="message" placeholder="Your Message" rows="4"></textarea>
+                    <textarea id="message" name="message" placeholder="Your Message" rows="4" required></textarea>
                     
-                    <button onclick="validateForm()">Submit</button>
+                    <button type="submit">Submit</button>
                 </form>
         
 
@@ -98,7 +132,7 @@
           <div>
             <iframe class="map-embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2573.935985696891!2d-125.12726002300114!3d49.82486833220888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54881ba521f0dd49%3A0xb8c066fbd0190296!2sKehler%20Vegetable%20Company!5e0!3m2!1sen!2sus!4v1731879794340!5m2!1sen!2sus" 
           allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            <img src="images/farm-plowing.jpg" alt="farm plowing">
+            <img src="../assets/images/farm-plowing.jpg" alt="farm plowing">
           </div>
         </section>
 
@@ -106,11 +140,11 @@
     <footer>
         <nav>
           <div class="footer-container">
-            <img class="logo" src="images/kehler-logo1.png" alt="kehler logo" />
+            <img class="logo" src="../assets/images/kehler-logo1.png" alt="kehler logo" />
             <ul>
               
               <li>
-                <a href="index.html">
+                <a href="index.php">
                   Home
               </a>
               </li>
@@ -118,14 +152,14 @@
 
              
               <li>
-                <a href="contact.html">
+                <a href="contact.php">
                 Contact
               </a>
               </li>
             
             
               <li>
-                <a href="gallery.html">
+                <a href="gallery.php">
                Gallery
               </a>
               </li> 
@@ -136,7 +170,7 @@
             <li>
                 follow along with the farm and to see whats growing find us on facebook and instagram.
                 
-                <div><a href="https://www.instagram.com/kehlervegetables" target="_blank"><img src="images/instagram.png" alt="instagram logo">@kehlervegetables</a></div>
+                <div><a href="https://www.instagram.com/kehlervegetables" target="_blank"><img src="../assets/images/instagram.png" alt="instagram logo">@kehlervegetables</a></div>
             </li>
            </ul>
           </div>

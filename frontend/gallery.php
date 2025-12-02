@@ -82,7 +82,7 @@ $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
 
 <header>
-    <a href="index.php"><img class="logo" src="images/kehler-logo1.png" alt="kehler logo"></a>
+    <a href="index.php"><img class="logo" src="../assets/images/kehler-logo1.png"  alt="kehler logo"></a>
 
     <nav>
       <a class="toggle" onclick="showNav()">
@@ -136,7 +136,7 @@ $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <footer>
     <nav>
         <div class="footer-container">
-            <img class="logo" src="images/kehler-logo1.png" alt="kehler logo" />
+            <img class="logo" src="../assets/images/kehler-logo1.png" alt="kehler logo" />
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="contact.php">Contact</a></li>
@@ -148,7 +148,7 @@ $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     Follow along with the farm to see what's growing.  
                     <div>
                         <a href="https://www.instagram.com/kehlervegetables" target="_blank">
-                            <img src="images/instagram.png" alt="instagram logo">@kehlervegetables
+                            <img src="../assets/images/instagram.png" alt="instagram logo">@kehlervegetables
                         </a>
                     </div>
                 </li>
